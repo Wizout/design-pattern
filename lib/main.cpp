@@ -1,3 +1,5 @@
+#include "command/garage.h"
+#include "command/garage_on_command.h"
 #include "command/light.h"
 #include "command/light_on_command.h"
 #include "command/simple_remote_control.h"
@@ -14,7 +16,14 @@ int main(int, char **) {
   std::unique_ptr<LightOnCommand> light_cmd =
       std::make_unique<LightOnCommand>(light.get());
 
+  std::unique_ptr<Garage> garage = std::make_unique<Garage>();
+  std::unique_ptr<GarageOnCommand> garage_cmd =
+      std::make_unique<GarageOnCommand>(garage.get());
+
   remote_ctrl->set_command(light_cmd.get());
+  remote_ctrl->button_was_pressed();
+
+  remote_ctrl->set_command(garage_cmd.get());
   remote_ctrl->button_was_pressed();
 
   return 0;
