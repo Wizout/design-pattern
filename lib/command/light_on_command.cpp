@@ -6,6 +6,5 @@ LightOnCommand::LightOnCommand(Light *light) : light_{light} {}
 
 void LightOnCommand::execute() {
   assert(light_);
-
   light_->on();
 }
